@@ -1,12 +1,11 @@
 const contains = (item, searchTxt) => {
   // item is an object
+  // anansi custom change => only search title field
   if (typeof item == 'object' && item != null) {
-    for (let key in item) {
-      const value = item[key];
+      const value = item.title;
       if (contains(value, searchTxt)) {
         return true;
       }
-    }
   }
   // string, number or boolean
   if (typeof item != 'object' && item != null && item != undefined) {
@@ -24,7 +23,9 @@ export const deepSearchInArr = (query, arr) => {
   for (let i = 0; i <= arr.length - 1; i++) {
     if (contains(arr[i], query)) {
       array.push(arr[i]);
-    } 
+    } else {
+      array.push(null);
+    }
     if (i == arr.length - 1) {
       return array;
     }
